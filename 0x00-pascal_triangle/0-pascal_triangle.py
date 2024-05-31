@@ -10,10 +10,10 @@ def pascal_triangle(n):
             row.append(triangle[i-1][j-1] + triangle[i-1][j])
         row.append(1)
         triangle.append(row)
-    
+
     return triangle
 
-# Example usage and testing:
+
 if __name__ == "__main__":
     def print_triangle(triangle):
         for row in triangle:
