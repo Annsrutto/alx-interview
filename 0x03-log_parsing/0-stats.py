@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """This module contains a script that reads
 stdin line by line and computes metrics"""
+
 import sys
 import signal
 
 
 def print_stats(total_size, status_counts):
-    """ Print the computed statistics """
+    """Print the computed statistics"""
     print("File size: {}".format(total_size))
     for code in sorted(status_counts.keys()):
         if status_counts[code] > 0:
@@ -14,13 +15,13 @@ def print_stats(total_size, status_counts):
 
 
 total_size = 0
-status_counts = {200: 0, 301: 0, 400: 0, 401: 0,
-                 403: 0, 404: 0, 405: 0, 500: 0}
+status_counts = {200: 0, 301: 0, 400: 0,
+                 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 line_count = 0
 
 
 def signal_handler(sig, frame):
-    """ Handle the keyboard interrupt signal """
+    """Handle the keyboard interrupt signal"""
     print_stats(total_size, status_counts)
     sys.exit(0)
 
@@ -57,3 +58,6 @@ try:
 except KeyboardInterrupt:
     print_stats(total_size, status_counts)
     sys.exit(0)
+except Exception as e:
+    print("Error:", str(e))
+    sys.exit(1)
