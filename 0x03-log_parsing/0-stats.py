@@ -2,6 +2,7 @@
 import sys
 import signal
 
+
 def print_stats(total_size, status_counts):
     """ Print the computed statistics """
     print("File size: {}".format(total_size))
@@ -9,14 +10,18 @@ def print_stats(total_size, status_counts):
         if status_counts[code] > 0:
             print("{}: {}".format(code, status_counts[code]))
 
+
 total_size = 0
-status_counts = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+status_counts = {200: 0, 301: 0, 400: 0, 401: 0,
+                 403: 0, 404: 0, 405: 0, 500: 0}
 line_count = 0
+
 
 def signal_handler(sig, frame):
     """ Handle the keyboard interrupt signal """
     print_stats(total_size, status_counts)
     sys.exit(0)
+
 
 # Register the signal handler for CTRL + C
 signal.signal(signal.SIGINT, signal_handler)
